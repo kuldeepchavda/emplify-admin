@@ -11,7 +11,7 @@ const JobList = () => {
 
     useEffect(() => {
         const j = async () => {
-            const data = await request("http://localhost:5000/job", { method: "GET" })
+            const data = await request(`${import.meta.env.VITE_BACKEND_URL}/job`, { method: "GET" })
             if (data) setJobs(data.data);
         }
         j();

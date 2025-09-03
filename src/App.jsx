@@ -41,8 +41,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/add_job" element={<JobForm />} />
-          <Route path="/list_jobs" element={<JobList />} />
-          {/* Protected Route */}
+          <Route path="/list_jobs" element={<JobList />} /> 
           <Route
             path="/profile"
             element={

@@ -4,6 +4,7 @@ export default function useApi() {
   const navigate = useNavigate();
 
   async function request(url, options = {}) {
+    console.log("Hit at url",url)
     const res = await fetch(url, {
       credentials: "include", // keep cookies
       ...options,

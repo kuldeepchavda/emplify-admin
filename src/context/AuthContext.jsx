@@ -11,8 +11,8 @@ const AuthProvider = ({ children }) => {
     const [errInfo, setErrInfo] = useState();
      useEffect(() => {
       async function g(params) {
-         fetch("http://localhost:5000/auth/check-session", {
-      credentials: "include", // important for cookies
+         fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/check-session`, {
+      credentials: "include", 
     })
       .then((res) => res.json())
       .then((data) => {
@@ -24,7 +24,8 @@ const AuthProvider = ({ children }) => {
   }, []);
   const login = async (username, password) => {
     console.log(username,password)
-    const res = await fetch("http://localhost:5000/auth/login", {
+    
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
       method: "POST",
       credentials: "include", 
       headers: { "Content-Type": "application/json" },
@@ -42,7 +43,7 @@ const AuthProvider = ({ children }) => {
     }};
 
   const signup = async (username, password) => {
-    const res = await fetch("http://localhost:5000/auth/signup", {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/signup`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -61,7 +62,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await fetch("http://localhost:5000/auth/logout", {
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/logout`, {
       credentials: "include",
     });
     setUser(null);

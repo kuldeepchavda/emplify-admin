@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useApi from "../../utils/Request"; // ⬅️ centralized API handler
-
+ 
 export default function JobForm() {
   const { request } = useApi(); // use our custom hook
 
@@ -33,7 +33,7 @@ export default function JobForm() {
       requiredSkills: formData.requiredSkills.split(",").map((s) => s.trim()),
     };
 
-    const data = await request("http://localhost:5000/job/", {
+    const data = await request(`${import.meta.env.VITE_BACKEND_URL}/job/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

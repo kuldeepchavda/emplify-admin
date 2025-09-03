@@ -2,7 +2,7 @@ import { React, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 import { AuthContext } from "../../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     await login(username, password);
   };
-
+  const navigate = useNavigate();
   return (
     <div className=" mt-10 ">
       <div className="  bg-gradient-to-br  flex items-center justify-center p-4 sm:p-6 lg:p-8 font-inter">

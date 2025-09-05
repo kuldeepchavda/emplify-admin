@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [loading, setLoading]=  useState();
     const [errInfo, setErrInfo] = useState();
+    // this is working 
      useEffect(() => {
       async function g(params) {
          fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/checksession`, {

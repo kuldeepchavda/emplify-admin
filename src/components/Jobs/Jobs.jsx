@@ -13,6 +13,7 @@ const JobList = () => {
         const j = async () => {
             const data = await request(`${import.meta.env.VITE_BACKEND_URL}/job`, { method: "GET" })
             if (data) setJobs(data.data);
+            console.log(data.data);
         }
         j();
     }, []);

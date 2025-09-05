@@ -11,37 +11,19 @@ const AuthProvider = ({ children }) => {
     const [errInfo, setErrInfo] = useState();
      useEffect(() => {
       async function g(params) {
-         fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/check-session`, {
+         fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/checksession`, {
       credentials: "include", 
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.loggedIn) setUser(data.user.username);
+        if (data.verified) setUser(data.user.username);
         setLoading(false);
       });
       }
       g();
   }, []);
-  const login = async (username, password) => {
-    console.log(username,password)
-    
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
-      method: "POST",
-      credentials: "include", 
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    });
-    const data = await res.json()
-     if(res.ok){
-      alert("Logged in successfully!!")
-      navigate("/");
-      setUser(data.data.username);
-    }
-     if (!res.ok){
-      setErrInfo(data.message);
-        console.log(data.message)
-    }};
-
+  
+// SIGN UP 
   const signup = async (username, password) => {
     const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/signup`, {
       method: "POST",
@@ -53,19 +35,50 @@ const AuthProvider = ({ children }) => {
     if (res.ok) {
       setUser({ username });
       navigate("/")
-      alert("Signed up successfully!!")
+      console.log("Signed up successfully!!")
       // console.log("Got body\n","username",response_.data.username,"\npassword",response_.data.password,response_.success );
     }
     if (!res.ok){
+      setErrInfo(response_.message);
       console.log("Got an error!!")
     }
   };
 
+  // LOGIN 
+  const login = async (username, password) => {
+    console.log(username,password)
+    
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
+      method: "POST",
+      credentials: "include", 
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+    const data = await res.json()
+     if(res.ok){
+      console.log("Logged in successfully!!")
+      navigate("/");
+      setUser(username);
+    }
+     if (!res.ok){
+      setErrInfo(data.message);
+        console.log(data.message)
+    }};
+
   const logout = async () => {
-    await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/logout`, {
+  
+  try {
+    const res =  await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/logout`, {
       credentials: "include",
     });
-    setUser(null);
+    const data = await res.json()
+    if(res.ok){
+      console.log(data)
+      setUser(null);
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
   };
     const testingData = "Context provider";
 

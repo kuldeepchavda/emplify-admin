@@ -15,7 +15,7 @@ const LinkTag = ({ route_, name, onClick }) => (
 );
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -35,7 +35,9 @@ const Navbar = () => {
             <>
             <LinkTag route_="" name="Home" />
           <LinkTag route_="list_jobs" name="Jobs" />
-          <LinkTag route_="add_job" name="Add Jobs" /></>
+          <LinkTag route_="add_job" name="Add Jobs" />
+          <button className="block font-semibold text-zinc-800 hover:text-zinc-600 px-3 py-2" onClick={()=>{console.log("Logout fetched")}}>Logout</button>
+          </>
           )}
           {!user && (
             <>
@@ -69,7 +71,10 @@ const Navbar = () => {
             route_="add_job"
             name="Add Jobs"
             onClick={() => setMenuOpen(false)}
-          /></>)}
+          />
+          <button className="block font-semibold text-zinc-800 hover:text-zinc-600 px-3 py-2" onClick={logout}>Logout</button>
+          
+          </>)}
           {!user && (
             <>
               <LinkTag

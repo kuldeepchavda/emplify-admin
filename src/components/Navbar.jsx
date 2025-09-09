@@ -17,13 +17,14 @@ const LinkTag = ({ route_, name, onClick, className }) => (
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
-
+// /applied/jobs
   // Define menu items once
   const links = user
     ? [
         { route_: "", name: "Home" },
         { route_: "list_jobs", name: "Jobs" },
         { route_: "add_job", name: "Add Jobs" },
+        { route_: "applied/jobs", name: "Received Applications" },
       ]
     : [
         { route_: "signup", name: "Signup" },

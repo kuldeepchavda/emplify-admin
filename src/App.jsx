@@ -9,6 +9,7 @@ import { AuthContext } from "./context/AuthContext";
 import JobForm from "./components/Jobs/CreateJob";
 import JobList from "./components/Jobs/Jobs";
 import AdminHomePage from "./components/AdminHomePage";
+import ReceivedApplications from "./components/Jobs/ReceivedApplications";
 
 // Protected route wrapper
 const PrivateRoute = ({ children }) => {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/add_job" element={<JobForm />} />
           <Route path="/list_jobs" element={<JobList />} /> 
+          <Route path="/applied/jobs" element={<ReceivedApplications/>} /> 
           <Route
             path="/profile"
             element={

@@ -8,18 +8,7 @@ import Profile from "./components/Profile";
 import { AuthContext } from "./context/AuthContext";
 import JobForm from "./components/Jobs/CreateJob";
 import JobList from "./components/Jobs/Jobs";
-
-// Home component
-const HomePage = () => {
-  return (
-    <div className=" flex mt-4 flex-col items-center justify-center font-inter">
-      <h1 className=" text-xl md:text-4xl font-bold text-gray-700 mb-4">
-        Welcome to the Admin Dashboard!
-      </h1>
-
-    </div>
-  );
-};
+import AdminHomePage from "./components/AdminHomePage";
 
 // Protected route wrapper
 const PrivateRoute = ({ children }) => {
@@ -37,7 +26,7 @@ function App() {
         <Routes>
 
           {/* Public Routes */}
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<AdminHomePage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/add_job" element={<JobForm />} />

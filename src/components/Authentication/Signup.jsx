@@ -4,14 +4,14 @@ import { AppContext } from "../../context/AppContext";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Signup() {
-  const [username, setUsername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const { toggleData } = useContext(AppContext);
   const { signup, errInfo } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signup(username, password);
+    await signup(email, password);
   };
 
   return (
@@ -25,7 +25,6 @@ export default function Signup() {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email Input */}
             <div>
               <label
                 htmlFor="email"
@@ -36,15 +35,14 @@ export default function Signup() {
               <input 
                 id="email"
                 name="email"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
                 placeholder="you@example.com"
                 className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900 placeholder-gray-400 sm:text-base transition-colors duration-200"
                 required
               />
             </div>
 
-            {/* Password Input */}
             <div>
               <label
                 htmlFor="password"
@@ -64,14 +62,12 @@ export default function Signup() {
               />
             </div>
 
-            {/* Error Message */}
             {errInfo && (
               <p className="my-2 ml-auto w-fit text-red-500 font-semibold">
                 {errInfo}
               </p>
             )}
 
-            {/* Signup Button */}
             <div>
               <button
                 type="submit"

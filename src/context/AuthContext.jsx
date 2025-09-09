@@ -12,12 +12,12 @@ const AuthProvider = ({ children }) => {
     // this is working 
      useEffect(() => {
       async function g(params) {
-         fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/checksession`, {
+         fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/admin/checksession`, {
       credentials: "include", 
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.verified) setUser(data.user.username);
+        if (data.verified) setUser(data.user.email);
         setLoading(false);
       });
       }
@@ -25,19 +25,19 @@ const AuthProvider = ({ children }) => {
   }, []);
   
 // SIGN UP 
-  const signup = async (username, password) => {
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/signup`, {
+  const signup = async (email, password) => {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/admin/signup`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
     const response_  =await res.json()
     if (res.ok) {
-      setUser({ username });
+      setUser({ email });
       navigate("/")
       console.log("Signed up successfully!!")
-      // console.log("Got body\n","username",response_.data.username,"\npassword",response_.data.password,response_.success );
+      // console.log("Got body\n","email",response_.data.email,"\npassword",response_.data.password,response_.success );
     }
     if (!res.ok){
       setErrInfo(response_.message);
@@ -46,20 +46,20 @@ const AuthProvider = ({ children }) => {
   };
 
   // LOGIN 
-  const login = async (username, password) => {
-    console.log(username,password)
+  const login = async (email, password) => {
+    console.log(email,password)
     
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/admin/login`, {
       method: "POST",
       credentials: "include", 
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ email, password }),
     });
     const data = await res.json()
      if(res.ok){
       console.log("Logged in successfully!!")
       navigate("/");
-      setUser(username);
+      setUser(email);
     }
      if (!res.ok){
       setErrInfo(data.message);
@@ -69,10 +69,11 @@ const AuthProvider = ({ children }) => {
   const logout = async () => {
   
   try {
-    const res =  await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/logout`, {
+    const res =  await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/admin/logout`, {
       credentials: "include",
     });
-    const data = await res.json()
+    console.log(res);
+    const data = await res.json();
     if(res.ok){
       console.log(data)
       setUser(null);

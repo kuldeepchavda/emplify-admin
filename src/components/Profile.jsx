@@ -8,7 +8,7 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>Welcome, {user.username}!</h2>
+      <h2>Welcome, {user.email}!</h2>
       <button onClick={logout}>Logout</button>
     </div>
   );

@@ -16,8 +16,10 @@ export default function useApi() {
       navigate("/login");
       return null; // stop further processing
     }
-
-    return res.json();
+    if(res.ok){
+      return res.json();
+    }
+    return {"message":"fucked!!"}
   }
 
   return { request };

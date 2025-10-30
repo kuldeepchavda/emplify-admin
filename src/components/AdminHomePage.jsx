@@ -1,4 +1,3 @@
-// AdminHomePage.jsx
 import { Link } from "react-router-dom";
 
 import  {AppContext}  from "../context/AppContext";
@@ -8,7 +7,6 @@ const AdminHomePage = () => {
   const {jobCounts } = useContext(AppContext);
   return (
     <div className="p-6 md:p-10 font-inter">
-      {/* Header */}
       <h1 className="text-2xl md:text-4xl font-bold text-gray-800 mb-2">
         Admin Dashboard
       </h1>
@@ -16,7 +14,6 @@ const AdminHomePage = () => {
         Manage jobs, view applicants, and oversee platform activity.
       </p>
 
-      {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         <Link
           to="/add_job"
@@ -49,7 +46,6 @@ const AdminHomePage = () => {
         </Link>
       </div>
 
-      {/* Stats Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="p-6 bg-white rounded-2xl shadow">
           <h4 className="text-gray-500 text-sm">Total Jobs</h4>

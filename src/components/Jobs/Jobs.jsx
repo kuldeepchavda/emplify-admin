@@ -7,7 +7,7 @@ import useApi from "../../utils/Request";
 const JobList = () => {
   const { request } = useApi();
   const { user } = useContext(AuthContext);
-  const { jobs, jobCounts } = useContext(AppContext);
+  const { jobs, jobCounts,setJobs } = useContext(AppContext);
 
 
 

@@ -22,7 +22,7 @@ const AppProvider  = ({children})=>{
     j();
   }, []);
    return (
-    <AppContext.Provider value={{data, toggleData, jobs, jobCounts}}> 
+    <AppContext.Provider value={{data, toggleData, jobs, jobCounts,setJobs}}> 
         {children}
     </AppContext.Provider>
 

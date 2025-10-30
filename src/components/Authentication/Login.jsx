@@ -27,7 +27,7 @@ export default function Login() {
             Log in to your account
           </h1>
           <p className="text-gray-500 text-sm">
-            Please enter your credentials below
+            Please enter your credentials below, 123456
           </p>
         </div>
 

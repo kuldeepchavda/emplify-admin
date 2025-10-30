@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import useApi from "../../utils/Request";
-
+import ModalExample from "../../utils/Modals/ModalExaplles";
+import JobModal from "../../utils/Modals/JobModal";
 const ReceivedApplications = () => {
   const { request } = useApi();
   const [applications, setApplications] = useState([]);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [userId, setUserId]= useState(null);
   // Fetch all applications (for admin)
   const fetchApplications = async () => {
     try {
@@ -15,7 +17,6 @@ const ReceivedApplications = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log(data)
       setApplications(data );
     } catch (error) {
       console.error("Error fetching applications:", error);
@@ -39,32 +40,41 @@ const ReceivedApplications = () => {
       console.error("Error updating status:", error);
     }
   };
-
+  
+  
   useEffect(() => {
     fetchApplications();
   }, []);
 
-  return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Received Applications</h2>
+  function openModal(id){
+    setIsOpen(true);
+    setUserId(id);
+    <JobModal isOpen={isOpen} setIsOpen={setIsOpen} id={userId}/>
+  }
 
+  return (
+    <div className="p-6 ">
+      <h2 className="text-2xl font-bold mb-4">Received Applications</h2>
+      <JobModal setIsOpen={setIsOpen} isOpen={isOpen}/>
       {applications.length === 0 ? (
         <p className="text-gray-600">No applications received yet.</p>
       ) : (
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className=" ">
           {applications.map((app) => (
             <div
               key={app._id}
-              className="p-4 rounded-xl border border-gray-200 shadow-sm bg-white flex flex-col justify-between"
+              className="p-4 rounded-xl border border-gray-200 shadow-sm flex  justify-between"
             >
-              {/* Job & User Info */}
               <div>
                 <h3 className="text-lg font-semibold text-blue-900">
                   {app.jobTitle}
                 </h3>
-                <p className="text-sm text-gray-600">
+              
+              <button onClick={()=>openModal(app._id)}>
+                  <p className="text-sm font-semibold text-blue-500 cursor-pointer">
                   Applicant: {app.applicantName || "Unknown"}
                 </p>
+              </button>
                 <p className="text-sm text-gray-500">{app.applicantEmail}</p>
                 <p className="text-sm text-gray-700 mt-2">
                   Current Status:{" "}
@@ -74,14 +84,13 @@ const ReceivedApplications = () => {
                 </p>
               </div>
 
-              {/* Status Actions */}
               <div className="mt-3 flex flex-wrap gap-2">
                 {["Pending", "Under Review", "Accepted", "Rejected"].map(
                   (status) => (
                     <button
                       key={status}
                       onClick={() => updateStatus(app._id, status)}
-                      className={`px-3 py-1 rounded-md text-sm font-medium shadow-sm
+                      className={`px-3 h-fit py-2 rounded-md text-sm font-medium shadow-sm
                         ${
                           status === "Pending"
                             ? "bg-yellow-500 text-white hover:bg-yellow-600"

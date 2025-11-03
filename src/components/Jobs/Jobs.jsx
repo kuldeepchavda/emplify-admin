@@ -7,24 +7,26 @@ import useApi from "../../utils/Request";
 const JobList = () => {
   const { request } = useApi();
   const { user } = useContext(AuthContext);
-  const { jobs, jobCounts,setJobs } = useContext(AppContext);
+  const { jobs, jobCounts,setJobs , setJobCounts} = useContext(AppContext);
 
 
 
   const deleteJob = async (id) => {
     try {
       const res = await request(`${import.meta.env.VITE_BACKEND_URL}/job/${id}`, { method: "DELETE" });
-      if (res.ok) {
         setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
-      }
+        setJobCounts(jobCounts-1);
+      console.log(res.ok)
+      alert("Deleted!!")
     } catch (error) {
+      alert("Couldn't delete.")
       console.log(error.message);
     }
   };
 
   return (
     <div className="min-h-screen  text-gray-900 p-3 md:p-6">
-      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-blue-700">Available Jobs</h1>
+      <h1 className="text-3xl md:text-4xl font-bold mb-6 text-blue-700">Available Jobs ({jobCounts})</h1>
       <div className=" w-full grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {Array.isArray(jobs) && jobs.map((job) => (
           <div

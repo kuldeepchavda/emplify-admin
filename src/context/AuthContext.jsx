@@ -15,8 +15,9 @@ const AuthProvider = ({ children }) => {
          fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/admin/checksession`, {
       credentials: "include", 
     })
-      .then((res) => {res.json(); console.log("we")})
+      .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.verified) setUser(data.user.email);
         setLoading(false);
       })
@@ -58,7 +59,7 @@ const AuthProvider = ({ children }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    const data = await res.json()
+    const data = await res.json();
      if(res.ok){
       console.log("Logged in successfully!!")
       navigate("/");

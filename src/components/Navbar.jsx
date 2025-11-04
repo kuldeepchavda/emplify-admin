@@ -19,7 +19,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 // /applied/jobs
   // Define menu items once
-  console.log("user",user)
+  console.log("user_",user)
   const links = user
     ? [
         { route_: "", name: "Home" },

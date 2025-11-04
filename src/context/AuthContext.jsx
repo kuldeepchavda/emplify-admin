@@ -19,7 +19,10 @@ const AuthProvider = ({ children }) => {
       .then((data) => {
         if (data.verified) setUser(data.user.email);
         setLoading(false);
-      });
+      })
+      .catch((err)=>{
+        setUser(null);
+      })
       }
       g();
   }, []);

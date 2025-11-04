@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
          fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/admin/checksession`, {
       credentials: "include", 
     })
-      .then((res) => res.json())
+      .then((res) => {res.json(); console.log("we")})
       .then((data) => {
         if (data.verified) setUser(data.user.email);
         setLoading(false);
